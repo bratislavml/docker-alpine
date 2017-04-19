@@ -55,3 +55,8 @@
   run which consul
   [ $status -eq 0 ]
 }
+
+@test "package 'su-exec' should be present" {
+  run which su-exec
+  [ $status -eq 0 ]
+}

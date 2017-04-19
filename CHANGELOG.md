@@ -1,3 +1,10 @@
+## v1.0.1 (April 19, 2017) 
+
+### Packages installed
+
+The following package has been added:
+  - `su-exec`
+
 ## v1.0.1 (April 13, 2017) 
 
 ### Environment Variables

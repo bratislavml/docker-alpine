@@ -12,7 +12,7 @@ ADD ./rootfs /
 
 # Install base packages
 RUN apk update && apk upgrade && \
-    apk-install curl wget bash tree && \
+    apk-install curl wget bash tree su-exec && \
     curl -Ls https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz | tar -xz -C / && \
     curl -Ls https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip -o consul-template.zip && unzip consul-template.zip -d /usr/local/bin && \
     curl -Ls https://github.com/janeczku/go-dnsmasq/releases/download/${GODNSMASQ_VERSION}/go-dnsmasq-min_linux-amd64 -o /usr/sbin/go-dnsmasq &&  \
