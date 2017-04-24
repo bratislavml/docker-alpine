@@ -162,7 +162,7 @@ VERSIONS=(3.4 3.5)
 IMAGE="bandsintown/alpine"
 IMAGE_TEST="$IMAGE-test"
 BUILD_NUM="$(git rev-parse --short HEAD)"
-TESTS=(test-image test-dns test-dns-multiple test-consul-template)
+TESTS=(test-image test-dns test-dns-multiple test-consul-template test-consul)
 
 # Check programs needed to tests are installed
 type docker >/dev/null 2>&1 || { error "Please install Docker to run tests."; exit 1;}
