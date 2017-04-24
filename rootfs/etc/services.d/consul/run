@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv sh
+
+if [ "${ENABLE_CONSUL}" = "true" ] && [ -d /etc/consul ]; then
+  # Environment variables interpolation
+  for file in $(ls /etc/consul); do
+    content=$(cat /etc/consul/$file | envsubst)
+    rm -f $file
+    echo "$content" > /etc/consul/$file
+  done
+
+  # Run consul agent
+  su-exec ${CONSUL_TEMPLATE_USER:-root} \
+     consul agent -config-dir /etc/consul
+fi
