@@ -65,3 +65,9 @@
   result=$(stat -c "%a" $(which su-exec))
   [ $result -eq 4755 ]
 }
+
+
+@test "package 'gettext' should be present" {
+  run which envsubst
+  [ $status -eq 0 ]
+}
