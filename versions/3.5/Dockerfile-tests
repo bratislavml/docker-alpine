@@ -14,7 +14,8 @@ RUN exec 2>&1 && apk-install bind-tools bc jq \
     && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
 	&& rm -f bats.zip dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && mv /tests/consul-template/etc /etc/consul-template
+    && mv /tests/consul-template/etc /etc/consul-template \
+    && mv /tests/consul/etc /etc/consul
 
 
 CMD ["bash"]
