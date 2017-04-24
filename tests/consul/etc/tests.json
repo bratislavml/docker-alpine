@@ -1,0 +1,8 @@
+{
+    "datacenter": "dc1",
+    "data_dir": "/var/lib/consul",
+    "retry_join": [
+        "$CONSUL_SERF_ADDRESS"
+    ],
+    "retry_max": 2
+}
