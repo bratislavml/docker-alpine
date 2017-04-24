@@ -7,12 +7,13 @@ services:
   # Test image (packages, services, scripts)
   test-image:
     image: bandsintown/alpine-test:${VERSION}
-    command: dockerize -wait http://test-consul:8500 -timeout 10s bats /tests/image
+    command: dockerize -wait http://consul:8500 -timeout 10s bats /tests/image
     depends_on:
-      - test-consul
+      - consul
     environment:
       - VERSION=${VERSION}
-      - CONSUL_ADDRESS=test-consul:8500
+      - CONSUL_ADDRESS=consul:8500
+      - CONSUL_SERF_ADDRESS=consul:8301
 
   # Tests with only one DNS Nameserver and Search Domain
   test-dns:
@@ -39,16 +40,17 @@ services:
   # Tests for consul template
   test-consul-template:
     image: bandsintown/alpine-test:${VERSION}
-    command: dockerize -wait http://test-consul:8500 -timeout 10s bats /tests/consul-template
+    command: dockerize -wait http://consul:8500 -timeout 10s bats /tests/consul-template
     depends_on:
-      - test-consul
+      - consul
     environment:
       - DISABLE_CONSUL_TEMPLATE=true
-      - CONSUL_ADDRESS=test-consul:8500
+      - CONSUL_ADDRESS=consul:8500
+      - CONSUL_SERF_ADDRESS=consul:8301
       - VERSION=${VERSION}
 
   # Consul
-  test-consul:
+  consul:
     image: consul
     command: "agent -dev -client 0.0.0.0 -ui"
     ports:

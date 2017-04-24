@@ -3,7 +3,7 @@ load helpers
 
 # Declare the service
 service=test-api
-consul_service="test-consul"
+consul_service="consul"
 address="$(dig +short ${consul_service})"
 port="8500"
 
