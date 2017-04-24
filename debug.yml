@@ -43,3 +43,13 @@ services:
     volumes:
       - ./tests:/tests
       - ./tests/consul-template/etc:/etc/consul-template
+
+
+  # Test debug for consul
+  test-consul:
+    command: bash
+    stdin_open: true
+    tty: true
+    working_dir: /tests/consul
+    volumes:
+      - ./tests:/tests

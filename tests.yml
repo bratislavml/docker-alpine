@@ -49,12 +49,27 @@ services:
       - CONSUL_SERF_ADDRESS=consul:8301
       - VERSION=${VERSION}
 
+  # Tests for consul managed by S6
+  test-consul:
+    image: bandsintown/alpine-test:${VERSION}
+    command: dockerize -wait http://consul:8500 -timeout 10s bats /tests/consul
+    depends_on:
+      - consul
+    environment:
+      - DISABLE_CONSUL_TEMPLATE=true
+      - ENABLE_CONSUL=true
+      - CONSUL_ADDRESS=consul:8500
+      - CONSUL_SERF_ADDRESS=consul:8301
+      - VERSION=${VERSION}
+
   # Consul
   consul:
     image: consul
     command: "agent -dev -client 0.0.0.0 -ui"
     ports:
       - 8500
+      - 8600
+      - 8301
     environment:
       - CONSUL_BIND_INTERFACE=eth0
 
