@@ -1,3 +1,15 @@
+## v1.0.4 (April 24, 2017) 
+
+### Packages installed
+
+The following package has been added:
+  - `gettext`
+  
+### Services installed
+
+The following services can be started :
+  - `Consul`: Run consul agent defining the configuration in `/etc/consul` when setting `ENABLE_CONSUL=true`
+  
 ## v1.0.3 (April 20, 2017) 
 
 ### Improvements

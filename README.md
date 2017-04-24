@@ -15,7 +15,7 @@ This image is derived from the well tested and documented [Alpine Docker image](
  - the [s6 supervisor for containers](https://github.com/just-containers/s6-overlay) 
  - a lightweight [DNS resolver](https://github.com/janeczku/go-dnsmasq) with minimal runtime and filesystem overhead 
  - [Consul Template](https://github.com/hashicorp/consul-template) for service discovery and configuration management
- - some useful packages: `bash`, `tree`, `curl`, `wget`, 
+ - some useful packages: `bash`, `tree`, `curl`, `wget`, `su-exec`, `gettext`
  - since 3.5 this packages have been added:`jq`, `bind-tools`, `consul`
 
 ## Motivation
@@ -111,6 +111,18 @@ docker run -ti --entrypoint=/init -e RUN_ON_AWS=true bandsintown/alpine bash
 ```
 
 The configuration of Consul template must be located in `/etc/consul-template/conf`.
+
+## Consul agent
+
+In some scenarios we need to run a Consul agent into the container in order to join a Consul server or agent.
+
+For this need it's possible to enable consul as a service managed by S6 doing:
+
+```
+docker run -ti --entrypoint=/init -e ENABLE_CONSUL=true my-image-with-consul-config bash 
+```
+
+A consul configuration MUST be defined in `/etc/consul` directory and the configuration files can use bash environment variables.
 
 
 # Build
