@@ -8,4 +8,5 @@ EC2_IP="$(curl -s --connect-timeout 5 http://169.254.169.254/latest/meta-data/lo
 if [ -n "${EC2_IP}" ]; then
   echo "${EC2_IP}" > /var/run/s6/container_environment/EC2_IP
   test -n "${CONSUL_ADDRESS}" || echo "${EC2_IP}:${CONSUL_PORT:-8500}" > /var/run/s6/container_environment/CONSUL_ADDRESS
+  test -n "${CONSUL_SERF_ADDRESS}" || echo "${EC2_IP}:${CONSUL_SERF_PORT:-8301}" > /var/run/s6/container_environment/CONSUL_SERF_ADDRESS
 fi
